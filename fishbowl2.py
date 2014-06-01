@@ -22,6 +22,7 @@ pygame.mouse.set_pos(430,360)
 
 SCORE = 0
 LEVEL = 1
+LEVELMULT = 10
 
 #Elementos graficos
 AGUA = (72,177,230)
@@ -32,7 +33,7 @@ FONDO = pygame.image.load("back.jpg")
 PEZ = pygame.image.load("fish")
 PEZRECT = PEZ.get_rect()
 
-COMIDA = pygame.image.load("bug")											#cargando comida
+COMIDA = pygame.image.load("food")											#cargando comida
 COMIDARECT = COMIDA.get_rect()												#enmarcando comida
 
 PEZD = pygame.image.load("fish_d")
@@ -52,7 +53,7 @@ while True:
 
 	SCREEN.blit(FONDO,(0,0)) #Colocacion fondo
 	pygame.draw.line(SCREEN,NEGRO,(0,0),(960,0),50) #Barra superior
-
+	textSurfaceObject = TEXTO.render("PUNTOS: " +str(SCORE) +"      NIVEL: " + str(LEVEL),True,LETRAS,NEGRO)
 	COMIDARECT.left = xcomida 												#con esto se situa el marco de la comida
 	COMIDARECT.top  = ycomida
 	#SCREEN.blit(COMIDA,(xcomida,ycomida))									#colocando la imagen sin marco en una posicion x y y									
@@ -83,18 +84,14 @@ while True:
 		elif event.type == pygame.MOUSEMOTION: #Movimiento pez con mouse
 		 	xpez,ypez = pygame.mouse.get_pos()
 	#**********************************************************************
-
-
-		
-			
-		
 			
 	if PEZRECT.colliderect(COMIDARECT):
-		SCORE = SCORE + 1
+		SCORE += 1
 		xcomida = random.randrange(1, 960,10)
 		ycomida = 0
-		if SCORE > 10:
+		if SCORE = LEVELMULT:
 			LEVEL = LEVEL+1
+			LEVELMULT = LEVELMULT+10
 	SCREEN.blit(textSurfaceObject,textRectObject)
 	pygame.display.update()
 	frecuencia.tick(FPS)
