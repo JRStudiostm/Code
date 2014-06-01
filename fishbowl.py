@@ -71,12 +71,12 @@ while True:
 		if event.type == QUIT:		
 			pygame.quit()
 			sys.exit()
-		# Movimiento del Pez y orientacion
-		(a,b)=pygame.mouse.get_pos() 
-		if b<a:
-			SCREEN.blit(PEZ2,(a,b))			
-		if a<b:
-			SCREEN.blit(PEZ,(a,b))	
+	# Movimiento del Pez y orientacion
+	(a,b)=pygame.mouse.get_pos() 
+	if b<a:
+		SCREEN.blit(PEZ2,(a,b))			
+	if a<b:
+		SCREEN.blit(PEZ,(a,b))	
 		#for iteracion in range(0,CANTIDADALIMENTOS+1):
 		#	if ALIMENTORECT[iteracion].collidepoint(a,b):
 		#		SCORE = SCORE +1
