@@ -40,6 +40,7 @@ textSurfaceObject = TEXTO.render("PUNTOS: " + str(SCORE) +"      NIVEL: " + str(
 textRectObject = textSurfaceObject.get_rect()
 textSurfaceObject2 = TEXTO.render("VICTORIA!",True,NEGRO,LETRAS)
 textRectObject2 = textSurfaceObject.get_rect()
+textRectObject2.center = (480,360)
 
 #Alimentos
 ALIMENTORECT = {}
@@ -77,11 +78,12 @@ while True:
 		if a<b:
 			SCREEN.blit(PEZ,(a,b))	
 		#for iteracion in range(0,CANTIDADALIMENTOS+1):
-		#	if ALIMENTORECT[iteracion].collidepoint((a,b)):
+		#	if ALIMENTORECT[iteracion].collidepoint(a,b):
 		#		SCORE = SCORE +1
 		#		ALIMENTOVISIBLE[iteracion] = False
 		#		if SCORE == CANTIDADALIMENTOS:
 		#			LEVEL = LEVEL+1
+		#			SCREEN.blit(textSurfaceObject2,textRectObject2)
 
 
 	pygame.display.update()
