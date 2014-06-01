@@ -1,6 +1,10 @@
-import pygame, sys
-from pygame.locals import *
+import pygame
+import sys
 import random
+import os
+import re
+import tweepy
+from pygame.locals import *
 pygame.init()
 pygame.font.init()
 
@@ -18,7 +22,6 @@ pygame.mouse.set_pos(430,360)
 #Elementos generales
 SCORE = 0
 CANTIDADALIMENTOS = 10
-FINALIZADO = False
 
 #Colores
 LETRAS = (240,247,25)
@@ -42,9 +45,10 @@ ALIMENTOY = 0
 VELOCIDADY = {}
 for iteracion in range(0,CANTIDADALIMENTOS+1): 
 	ALIMENTORECT[iteracion] = ALIMENTO.get_rect()
-	ALIMENTOVISIBLE[iteracion] = True
 	ALIMENTORECT[iteracion].left = random.randrange(0,960)
 	ALIMENTORECT[iteracion].top = 0
+	for iteracion2 in range(0,720) :
+		ALIMENTORECT[iteracion].top = ALIMENTORECT[iteracion].top *200
 	VELOCIDADY[iteracion] = 3
 
 while True:
@@ -54,6 +58,7 @@ while True:
 	for iteracion in range(0,CANTIDADALIMENTOS+1):
 		if ALIMENTORECT[iteracion]:
 			SCREEN.blit(ALIMENTO,ALIMENTORECT[iteracion])
+			ALIMENTORECT[iteracion].move_ip(ALIMENTOX,random.randrange(0,10))
 
 	for event in pygame.event.get():
 		if event.type == QUIT:		
@@ -61,7 +66,6 @@ while True:
 			sys.exit()
 		elif event.type == pygame.MOUSEMOTION: #Movimiento pez con mouse
 			SCREEN.blit(PEZ,(event.pos))
-
 
 	pygame.display.update()
 	frecuencia.tick(FPS)
