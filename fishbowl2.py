@@ -91,6 +91,7 @@ while True:
 			
 	if PEZRECT.colliderect(COMIDARECT):
 		SCORE += 1
+		textSurfaceObject = TEXTO.render("PUNTOS: " + str(SCORE),True,LETRAS,NEGRO)
 		xcomida = random.randrange(1, 960,10)
 		ycomida = 0
 
