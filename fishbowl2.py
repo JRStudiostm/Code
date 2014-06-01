@@ -12,7 +12,7 @@ pygame.font.init()
 FPS = 200
 frecuencia = pygame.time.Clock()
 SCREEN = pygame.display.set_mode((960,720),0,32)
-pygame.display.set_caption('FishBowl v0.3')
+pygame.display.set_caption('FishBowl v0.7')
 random.randint(0, 960)
 
 #Mouse
@@ -21,6 +21,7 @@ pygame.mouse.get_focused(True)
 pygame.mouse.set_pos(430,360)
 
 SCORE = 0
+LEVEL = 1
 
 #Elementos graficos
 AGUA = (72,177,230)
@@ -31,13 +32,13 @@ FONDO = pygame.image.load("back.jpg")
 PEZ = pygame.image.load("fish")
 PEZRECT = PEZ.get_rect()
 
-COMIDA = pygame.image.load("food")											#cargando comida
+COMIDA = pygame.image.load("bug")											#cargando comida
 COMIDARECT = COMIDA.get_rect()												#enmarcando comida
 
 PEZD = pygame.image.load("fish_d")
 ALIMENTO = pygame.image.load("food")
 TEXTO = pygame.font.Font("Fishbowl.ttf",10)
-textSurfaceObject = TEXTO.render("PUNTOS: " + str(SCORE),True,LETRAS,NEGRO)
+textSurfaceObject = TEXTO.render("PUNTOS: " + str(SCORE) +"      NIVEL: " + str(LEVEL),True,LETRAS,NEGRO)
 textRectObject = textSurfaceObject.get_rect()
 
 
@@ -51,7 +52,6 @@ while True:
 
 	SCREEN.blit(FONDO,(0,0)) #Colocacion fondo
 	pygame.draw.line(SCREEN,NEGRO,(0,0),(960,0),50) #Barra superior
-	SCREEN.blit(textSurfaceObject,textRectObject)
 
 	COMIDARECT.left = xcomida 												#con esto se situa el marco de la comida
 	COMIDARECT.top  = ycomida
@@ -90,10 +90,12 @@ while True:
 		
 			
 	if PEZRECT.colliderect(COMIDARECT):
-		SCORE += 1
+		SCORE = SCORE + 1
 		xcomida = random.randrange(1, 960,10)
 		ycomida = 0
-
+		if SCORE > 10:
+			LEVEL = LEVEL+1
+	SCREEN.blit(textSurfaceObject,textRectObject)
 	pygame.display.update()
 	frecuencia.tick(FPS)
 
