@@ -30,6 +30,9 @@ LETRAS = (240,247,25)
 NEGRO = (0,0,0)
 FONDO = pygame.image.load("back.jpg")
 
+BURBUJA = pygame.image.load("bubble")
+BURBUJARECT = BURBUJA.get_rect()
+
 PEZ = pygame.image.load("fish")
 PEZRECT = PEZ.get_rect()
 
@@ -45,6 +48,8 @@ textRectObject = textSurfaceObject.get_rect()
 
 ycomida = 0																	#definiendo la x y a y de la comida
 xcomida = random.randrange(1, 960,10)
+yburbuja = 750
+xburbuja = random.randrange(1,960,10)
 #SCREEN.blit(COMIDA,(xcomida,ycomida))										#colocando la imagen sin marco en una posicion x y y
 xpez,ypez = pygame.mouse.get_pos()
 while True:
@@ -62,17 +67,30 @@ while True:
 	PEZRECT.top = ypez														#colocando al rectangulo del pez en la coordenada y del mouse
 	SCREEN.blit(PEZ,PEZRECT)
 	aumentovelocidad	= 2													#colocando al pez dentro del rectangulo
+	BURBUJARECT.left = xburbuja
+	BURBUJARECT.top = yburbuja
+	SCREEN.blit(BURBUJA,BURBUJARECT)
 	
 	#****************************************************************
 	#ESTA PARTE DE CODIGO MUEVE LA COMIDA
 	if ycomida >= 700:
 		xcomida = random.randrange(1, 960,10)
 		ycomida = 0
+		SCORE -= 1
 		#SCREEN.blit(COMIDA,(xcomida,ycomida))
 	elif ycomida < 700:
 		aumentovelocidad += 6
 		ycomida = ycomida + aumentovelocidad
 
+	#****************************************************************
+	#ESTA PARTE DE CODIGO MUEVE A LA BURBUJA
+	if yburbuja <= 0:
+		xburbuja = random.randrange(1,960,10)
+		yburbuja = 750
+	elif yburbuja >  0:
+		yburbuja -= 8
+		
+		
 	#*****************************************************************
 	#ESTA PARTE DE CODIGO MUEVE AL PEZ Y VERIFICA SI SE QUIERE SALIR DE JUEGO
 
