@@ -26,7 +26,7 @@ PEZ = pygame.image.load("fish")
 PEZD = pygame.image.load("fish_d")
 ALIMENTO = pygame.image.load("food")
 TEXTO = pygame.font.Font("Fishbowl.ttf",10)
-textSurfaceObject = TEXTO.render("PUNTOS:",True,LETRAS,NEGRO)
+textSurfaceObject = TEXTO.render("PUNTOS: " + str(SCORE),True,LETRAS,NEGRO)
 textRectObject = textSurfaceObject.get_rect()
 
 while True:
