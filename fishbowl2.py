@@ -12,11 +12,11 @@ pygame.font.init()
 FPS = 200
 frecuencia = pygame.time.Clock()
 SCREEN = pygame.display.set_mode((960,720),0,32)
-pygame.display.set_caption('FishBowl v0.7')
+pygame.display.set_caption('FishBowl v0.8')
 random.randint(0, 960)
 
 #Mouse
-pygame.mouse.set_visible(True)
+pygame.mouse.set_visible(False)
 pygame.mouse.get_focused(True)
 pygame.mouse.set_pos(430,360)
 
@@ -89,9 +89,9 @@ while True:
 		SCORE += 1
 		xcomida = random.randrange(1, 960,10)
 		ycomida = 0
-		if SCORE = LEVELMULT:
+		if SCORE == LEVELMULT:
 			LEVEL = LEVEL+1
-			LEVELMULT = LEVELMULT+10
+			LEVELMULT = LEVELMULT*LEVEL
 	SCREEN.blit(textSurfaceObject,textRectObject)
 	pygame.display.update()
 	frecuencia.tick(FPS)
