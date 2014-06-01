@@ -5,7 +5,7 @@ FPS = 30
 frecuencia = pygame.time.Clock()
 SCREEN = pygame.display.set_mode((800,600),0,32)
 pygame.display.set_caption('Protipo Proyecto')
-SKY = (112,118,144)
+SKY = (112,118,144)	
 CLOUD = (192,192,192)
 SUN = (255,255,255)
 RED = (255,0,0)
