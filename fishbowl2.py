@@ -69,7 +69,7 @@ yburbuja = 750
 xburbuja = random.randrange(1,960,10)
 #SCREEN.blit(COMIDA,(xcomida,ycomida))										#colocando la imagen sin marco en una posicion x y y
 xpez,ypez = pygame.mouse.get_pos()
-pygame.mixer.music.load("music.wav")
+pygame.mixer.music.load("loop.wav")
 pygame.mixer.music.play(-1,0)
 
 while True:
