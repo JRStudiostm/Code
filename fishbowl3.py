@@ -160,6 +160,7 @@ while True:
 			ypez = -91
 			ycomida = 0
 			aumentovelocidad = 0
+			velocidadbicho =0
 			if event.type == pygame.KEYDOWN:
 				if event.key == pygame.K_ESCAPE:
 					sys.exit()
