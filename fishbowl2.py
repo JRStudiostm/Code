@@ -12,7 +12,7 @@ pygame.font.init()
 FPS = 200
 frecuencia = pygame.time.Clock()
 SCREEN = pygame.display.set_mode((960,720),0,32)
-pygame.display.set_caption('FishBowl v0.8')
+pygame.display.set_caption('FishBowl v0.9')
 random.randint(0, 960)
 
 #Mouse
@@ -42,11 +42,15 @@ COMIDARECT = COMIDA.get_rect()												#enmarcando comida
 PEZD = pygame.image.load("fish_d")
 ALIMENTO = pygame.image.load("food")
 TEXTO = pygame.font.Font("Fishbowl.ttf",10)
+TEXTO2 = pygame.font.Font("Fishbowl.ttf",50)
 textSurfaceObject = TEXTO.render("PUNTOS: " + str(SCORE) +"      NIVEL: " + str(LEVEL),True,LETRAS,NEGRO)
 textRectObject = textSurfaceObject.get_rect()
-textSurfaceObject2 = TEXTO.render("PERDISTE",True,NEGRO,LETRAS)
-textRectObject2.center = (480,360)
-
+textSurfaceObject2 = TEXTO2.render("PERDISTE!",True,LETRAS,NEGRO)
+textRectObject2 = textSurfaceObject.get_rect()
+textRectObject2.center = (350,310)
+textSurfaceObject3 = TEXTO.render("PRESIONA ESC PARA SALIR",True,LETRAS,NEGRO)
+textRectObject3 = textSurfaceObject.get_rect()
+textRectObject3.center = (430,400)
 
 ycomida = 0																	#definiendo la x y a y de la comida
 xcomida = random.randrange(1, 960,10)
@@ -112,6 +116,12 @@ while True:
 		if SCORE == LEVELMULT:
 			LEVEL = LEVEL+1
 			LEVELMULT = LEVELMULT*LEVEL
+	elif SCORE < 0:
+		SCREEN.blit(textSurfaceObject2,textRectObject2)
+		SCREEN.blit(textSurfaceObject3,textRectObject3)
+		if event.type == pygame.KEYDOWN:
+			if event.key == pygame.K_ESCAPE:
+				sys.exit()
 	SCREEN.blit(textSurfaceObject,textRectObject)
 	pygame.display.update()
 	frecuencia.tick(FPS)
