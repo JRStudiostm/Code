@@ -40,7 +40,10 @@ PEZRECT = PEZ.get_rect()
 PEZ2RECT = PEZ2.get_rect()
 
 COMIDA = pygame.image.load("food")											#cargando comida
-COMIDARECT = COMIDA.get_rect()												#enmarcando comida
+COMIDARECT = COMIDA.get_rect()
+
+BUG = pygame.image.load("bug")
+BUGRECT = BUG.get_rect()
 
 TITULO = pygame.image.load("title")
 TEXTO = pygame.font.Font("Fishbowl.ttf",10)
@@ -60,6 +63,8 @@ yburbuja = 750
 xburbuja = random.randrange(1,960,10)
 xtitulo = 220
 ytitulo = 250
+ybug = -200 			# LE PUSE ESTE VALOR PARA QUE HAYA UN RETRASO DE TIEMPO PARA QUE APAREZCA EN LA PANTALLA
+xbug = random.randrange(1,960,10)
 xpez,ypez = pygame.mouse.get_pos()
 
 
@@ -123,6 +128,14 @@ while True:
 		elif event.type == pygame.MOUSEMOTION: #Movimiento pez con mouse
 		 	xpez,ypez = pygame.mouse.get_pos()
 		#**********************************************************************
+		#ESTA PARTE DE CODIGO MUEVE A EL BICHEJO =)
+		if ybug >= 700:
+			xbug = random.randrange(1,960,10)
+			ybug = 0
+		elif ybug < 700:
+			velocidadbicho *= 3
+			ybug = ybug + velocidadbicho*LEVEL
+		#***********************************************************************
 			
 		if PEZRECT.colliderect(COMIDARECT) or PEZ2RECT.colliderect(COMIDARECT):
 			SCORE += 1
@@ -131,6 +144,10 @@ while True:
 			if SCORE == LEVELMULT:
 				LEVEL = LEVEL+1
 				LEVELMULT = LEVELMULT*LEVEL
+		elif PEZRECT.colliderect(BUGRECT) or PEZ2RECT.colliderect(BUGRECT):
+			SCORE -= 1
+			xbug = random.randrange(1,960,10)
+			ybug = -200
 		elif SCORE < 0:
 			SCREEN.blit(textSurfaceObject2,textRectObject2)
 			SCREEN.blit(textSurfaceObject3,textRectObject3)
