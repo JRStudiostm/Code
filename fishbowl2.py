@@ -12,7 +12,7 @@ pygame.font.init()
 FPS = 200
 frecuencia = pygame.time.Clock()
 SCREEN = pygame.display.set_mode((960,720),0,32)
-pygame.display.set_caption('FishBowl v0.9')
+pygame.display.set_caption('FishBowl v0.9.3')
 random.randint(0, 960)
 
 #Mouse
@@ -34,12 +34,13 @@ BURBUJA = pygame.image.load("bubble")
 BURBUJARECT = BURBUJA.get_rect()
 
 PEZ = pygame.image.load("fish")
+PEZD = pygame.image.load("fish_d")
 PEZRECT = PEZ.get_rect()
 
 COMIDA = pygame.image.load("food")											#cargando comida
 COMIDARECT = COMIDA.get_rect()												#enmarcando comida
 
-PEZD = pygame.image.load("fish_d")
+
 ALIMENTO = pygame.image.load("food")
 TEXTO = pygame.font.Font("Fishbowl.ttf",10)
 TEXTO2 = pygame.font.Font("Fishbowl.ttf",50)
@@ -58,6 +59,8 @@ yburbuja = 750
 xburbuja = random.randrange(1,960,10)
 #SCREEN.blit(COMIDA,(xcomida,ycomida))										#colocando la imagen sin marco en una posicion x y y
 xpez,ypez = pygame.mouse.get_pos()
+
+
 while True:
 	#pos_mouse = pygame.mouse.get_pos()
     #mov_mouse = pygame.mouse.get_rel()
@@ -119,6 +122,11 @@ while True:
 	elif SCORE < 0:
 		SCREEN.blit(textSurfaceObject2,textRectObject2)
 		SCREEN.blit(textSurfaceObject3,textRectObject3)
+		SCREEN.blit(PEZD,(380,50))
+		xpez = -138
+		ypez = -91
+		ycomida = 0
+		aumentovelocidad = 0
 		if event.type == pygame.KEYDOWN:
 			if event.key == pygame.K_ESCAPE:
 				sys.exit()
