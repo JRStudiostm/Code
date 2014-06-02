@@ -42,6 +42,11 @@ PEZ2RECT = PEZ2.get_rect()
 COMIDA = pygame.image.load("food")											#cargando comida
 COMIDARECT = COMIDA.get_rect()												#enmarcando comida
 
+LEVELUP = pygame.image.load("verde")
+LEVELUPRECT = LEVELUP.get_rect()
+
+SCOREDOWN = pygame.image.load("rojo")
+SCOREDOWNRECT = LEVELUP.get_rect()
 
 ALIMENTO = pygame.image.load("food")
 TEXTO = pygame.font.Font("Fishbowl.ttf",10)
@@ -54,6 +59,9 @@ textRectObject2.center = (350,310)
 textSurfaceObject3 = TEXTO.render("PRESIONA ESC PARA SALIR",True,LETRAS,NEGRO)
 textRectObject3 = textSurfaceObject.get_rect()
 textRectObject3.center = (430,400)
+textSurfaceObject4 = TEXTO2.render("Level UP!",True,LETRAS,NEGRO)
+textRectObject4 = textSurfaceObject.get_rect()
+textRectObject4.center = (350,310)
 
 ycomida = 0																	#definiendo la x y a y de la comida
 xcomida = random.randrange(1, 960,10)
@@ -61,7 +69,8 @@ yburbuja = 750
 xburbuja = random.randrange(1,960,10)
 #SCREEN.blit(COMIDA,(xcomida,ycomida))										#colocando la imagen sin marco en una posicion x y y
 xpez,ypez = pygame.mouse.get_pos()
-
+pygame.mixer.music.load("music.wav")
+pygame.mixer.music.play(-1,0)
 
 while True:
 	#pos_mouse = pygame.mouse.get_pos()
@@ -87,13 +96,14 @@ while True:
 	BURBUJARECT.left = xburbuja
 	BURBUJARECT.top = yburbuja
 	SCREEN.blit(BURBUJA,BURBUJARECT)
-	
+
 	#****************************************************************
 	#ESTA PARTE DE CODIGO MUEVE LA COMIDA
 	if ycomida >= 700:
 		xcomida = random.randrange(1, 960,10)
 		ycomida = 0
 		SCORE -= LEVEL*2
+		SCREEN.blit(SCOREDOWN,SCOREDOWNRECT)
 		#SCREEN.blit(COMIDA,(xcomida,ycomida))
 	elif ycomida < 700:
 		aumentovelocidad += 3
@@ -106,20 +116,21 @@ while True:
 		yburbuja = 750
 	elif yburbuja >  0:
 		yburbuja -= 8
-		
-		
+
+
 	#*****************************************************************
 	#ESTA PARTE DE CODIGO MUEVE AL PEZ Y VERIFICA SI SE QUIERE SALIR DE JUEGO
 
 	for event in pygame.event.get():
 		#SCREEN.blit(PEZRECT,pygame.mouse.get_pos())
 		if event.type == QUIT:		
+			pygame.mixer.music.stop()
 			pygame.quit()
 			sys.exit()
 		elif event.type == pygame.MOUSEMOTION: #Movimiento pez con mouse
 		 	xpez,ypez = pygame.mouse.get_pos()
 	#**********************************************************************
-			
+
 	if PEZRECT.colliderect(COMIDARECT) or PEZ2RECT.colliderect(COMIDARECT):
 		SCORE += 1
 		xcomida = random.randrange(1, 960,10)
@@ -127,6 +138,7 @@ while True:
 		if SCORE == LEVELMULT:
 			LEVEL = LEVEL+1
 			LEVELMULT = LEVELMULT*LEVEL
+			SCREEN.blit(LEVELUP,LEVELUPRECT)
 	elif SCORE < 0:
 		SCREEN.blit(textSurfaceObject2,textRectObject2)
 		SCREEN.blit(textSurfaceObject3,textRectObject3)
@@ -141,4 +153,3 @@ while True:
 	SCREEN.blit(textSurfaceObject,textRectObject)
 	pygame.display.update()
 	frecuencia.tick(FPS)
-
