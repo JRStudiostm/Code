@@ -77,8 +77,12 @@ while True:
 		COMIDARECT.top  = ycomida												#colocando la imagen sin marco en una posicion x y y									
 		SCREEN.blit(COMIDA,COMIDARECT)											#colocando la imagen con marco en una posicion
 		aumentovelocidad	= 2													#colocando al pez dentro del rectangulo
+		velocidadbicho = 2
 		BURBUJARECT.left = xburbuja
 		BURBUJARECT.top = yburbuja
+		BUGRECT.left = xbug
+		BUGRECT.top  = ybug
+		SCREEN.blit(BUG,BUGRECT)
 		SCREEN.blit(BURBUJA,BURBUJARECT)
 		#****************************************************************
 		#ESTA PARTE DE CODIGO MUEVE A LA BURBUJA
