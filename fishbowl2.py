@@ -12,7 +12,7 @@ pygame.font.init()
 FPS = 200
 frecuencia = pygame.time.Clock()
 SCREEN = pygame.display.set_mode((960,720),0,32)
-pygame.display.set_caption('FishBowl v0.9.3')
+pygame.display.set_caption('FishBowl v0.9.4')
 random.randint(0, 960)
 
 #Mouse
@@ -34,8 +34,10 @@ BURBUJA = pygame.image.load("bubble")
 BURBUJARECT = BURBUJA.get_rect()
 
 PEZ = pygame.image.load("fish")
+PEZ2 = pygame.image.load("fish2")
 PEZD = pygame.image.load("fish_d")
 PEZRECT = PEZ.get_rect()
+PEZ2RECT = PEZ2.get_rect()
 
 COMIDA = pygame.image.load("food")											#cargando comida
 COMIDARECT = COMIDA.get_rect()												#enmarcando comida
@@ -72,9 +74,15 @@ while True:
 	COMIDARECT.top  = ycomida
 	#SCREEN.blit(COMIDA,(xcomida,ycomida))									#colocando la imagen sin marco en una posicion x y y									
 	SCREEN.blit(COMIDA,COMIDARECT)											#colocando la imagen con marco en una posicion
-	PEZRECT.left = xpez														#colocando al rectangulo del pez en la coordenada x del mouse
-	PEZRECT.top = ypez														#colocando al rectangulo del pez en la coordenada y del mouse
-	SCREEN.blit(PEZ,PEZRECT)
+
+	if ypez<xpez:
+		PEZ2RECT.left = xpez														#colocando al rectangulo del pez en la coordenada x del mouse, dependiendo del como esté orientado es si muestra al pez a la derecha o izquierda
+		PEZ2RECT.top = ypez
+		SCREEN.blit(PEZ2,PEZ2RECT)
+	if xpez<ypez:
+		PEZRECT.left = xpez														#colocando al rectangulo del pez en la coordenada x del mouse
+		PEZRECT.top = ypez
+		SCREEN.blit(PEZ,PEZRECT)												#colocando al rectangulo del pez en la coordenada y del mouse
 	aumentovelocidad	= 2													#colocando al pez dentro del rectangulo
 	BURBUJARECT.left = xburbuja
 	BURBUJARECT.top = yburbuja
@@ -85,11 +93,11 @@ while True:
 	if ycomida >= 700:
 		xcomida = random.randrange(1, 960,10)
 		ycomida = 0
-		SCORE -= 1
+		SCORE -= LEVEL*2
 		#SCREEN.blit(COMIDA,(xcomida,ycomida))
 	elif ycomida < 700:
-		aumentovelocidad += 6
-		ycomida = ycomida + aumentovelocidad
+		aumentovelocidad += 3
+		ycomida = ycomida + aumentovelocidad*LEVEL
 
 	#****************************************************************
 	#ESTA PARTE DE CODIGO MUEVE A LA BURBUJA
@@ -112,7 +120,7 @@ while True:
 		 	xpez,ypez = pygame.mouse.get_pos()
 	#**********************************************************************
 			
-	if PEZRECT.colliderect(COMIDARECT):
+	if PEZRECT.colliderect(COMIDARECT) or PEZ2RECT.colliderect(COMIDARECT):
 		SCORE += 1
 		xcomida = random.randrange(1, 960,10)
 		ycomida = 0
