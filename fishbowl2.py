@@ -44,6 +44,8 @@ ALIMENTO = pygame.image.load("food")
 TEXTO = pygame.font.Font("Fishbowl.ttf",10)
 textSurfaceObject = TEXTO.render("PUNTOS: " + str(SCORE) +"      NIVEL: " + str(LEVEL),True,LETRAS,NEGRO)
 textRectObject = textSurfaceObject.get_rect()
+textSurfaceObject2 = TEXTO.render("PERDISTE",True,NEGRO,LETRAS)
+textRectObject2.center = (480,360)
 
 
 ycomida = 0																	#definiendo la x y a y de la comida
