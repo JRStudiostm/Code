@@ -76,7 +76,7 @@ while True:
 	SCREEN.blit(COMIDA,COMIDARECT)											#colocando la imagen con marco en una posicion
 
 	if ypez<xpez:
-		PEZ2RECT.left = xpez														#colocando al rectangulo del pez en la coordenada x del mouse, dependiendo del como esté orientado es si muestra al pez a la derecha o izquierda
+		PEZ2RECT.left = xpez														#colocando al rectangulo del pez en la coordenada x del mouse, dependiendo del como este orientado es si muestra al pez a la derecha o izquierda
 		PEZ2RECT.top = ypez
 		SCREEN.blit(PEZ2,PEZ2RECT)
 	if xpez<ypez:
