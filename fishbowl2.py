@@ -43,10 +43,10 @@ PEZ2RECT = PEZ2.get_rect()
 COMIDA = pygame.image.load("food")											#cargando comida
 COMIDARECT = COMIDA.get_rect()												#enmarcando comida
 
-LEVELUP = pygame.image.load("verde")
+LEVELUP = pygame.image.load("verde.jpg")
 LEVELUPRECT = LEVELUP.get_rect()
 
-SCOREDOWN = pygame.image.load("rojo")
+SCOREDOWN = pygame.image.load("rojo.jpg")
 SCOREDOWNRECT = LEVELUP.get_rect()
 
 BUG = pygame.image.load("bug")
