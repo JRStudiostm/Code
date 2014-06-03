@@ -50,6 +50,9 @@ LEVELUPRECT = LEVELUP.get_rect()
 SCOREDOWN = pygame.image.load("rojo.jpg")
 SCOREDOWNRECT = LEVELUP.get_rect()
 
+EATBUG = pygame.image.load("naranja.jpg")
+EATBUGRECT = EATBUG.get_rect()
+
 BUG = pygame.image.load("bug")
 BUGRECT = BUG.get_rect()
 
@@ -121,6 +124,8 @@ while True:
 	#****************************************************************
 	#ESTA PARTE DE CODIGO MUEVE LA COMIDA
 	if ycomida >= 700:
+		sonido3=pygame.mixer.Sound("chicharra.wav")   	#Sonido cuando se pierde un alimento
+		sonido3.play()
 		xcomida = random.randrange(1, 960,10)
 		ycomida = 0
 		SCORE -= LEVEL*2
@@ -162,16 +167,23 @@ while True:
 
 	if PEZRECT.colliderect(COMIDARECT) or PEZ2RECT.colliderect(COMIDARECT):
 		SCORE += 1
+		sonido4=pygame.mixer.Sound("atrapacomida.wav")   	#Sonido cuando come alimento
+		sonido4.play()
 		MAXSCORE = SCORE
 		xcomida = random.randrange(1, 960,10)
 		ycomida = 0
 		MORDIDA.play(0,0,-1)
 		if SCORE == LEVELMULT:
 			LEVEL = LEVEL+1
+			sonido2=pygame.mixer.Sound("level.wav")   	#Sonido de subir nivel
+			sonido2.play()
 			LEVELMULT = LEVELMULT*LEVEL
 			SCREEN.blit(LEVELUP,LEVELUPRECT)
 	elif PEZRECT.colliderect(BUGRECT) or PEZ2RECT.colliderect(BUGRECT):
 			SCORE -= 1*LEVEL
+			SCREEN.blit(EATBUG,EATBUGRECT)
+			sonido5=pygame.mixer.Sound("comebicho.wav")   	#Sonido cuando come bicho
+			sonido5.play()
 			ASCO.play(0,0,-1)
 			xbug = random.randrange(1,960,10)
 			ybug = -200
