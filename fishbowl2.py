@@ -179,6 +179,7 @@ while True:
 		xpez = -138
 		ypez = -91
 		ycomida = 0
+		ybug= 0
 		aumentovelocidad = 0
 		velocidadbicho =0
 		if event.type == pygame.KEYDOWN:
