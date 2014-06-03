@@ -22,6 +22,7 @@ pygame.mouse.get_focused(True)
 pygame.mouse.set_pos(430,360)
 
 SCORE = 0
+MAXSCORE = 0
 LEVEL = 1
 LEVELMULT = 10
 
@@ -79,11 +80,13 @@ xpez,ypez = pygame.mouse.get_pos()
 #Colocando sonido al juego
 pygame.mixer.music.load("loop.wav")											
 pygame.mixer.music.play(-1,0)
+MORDIDA = pygame.mixer.Sound("bite.wav")
+ASCO = pygame.mixer.Sound("Damage.wav")
+MUERTE = pygame.mixer.Sound("died.wav")
 
 while True:
 	#pos_mouse = pygame.mouse.get_pos()
     #mov_mouse = pygame.mouse.get_rel()
-
 	SCREEN.blit(FONDO,(0,0)) #Colocacion fondo
 	pygame.draw.line(SCREEN,NEGRO,(0,0),(960,0),50) #Barra superior
 	textSurfaceObject = TEXTO.render("PUNTOS: " +str(SCORE) +"      NIVEL: " + str(LEVEL),True,LETRAS,NEGRO)
@@ -99,6 +102,7 @@ while True:
 	SCREEN.blit(BURBUJA,BURBUJARECT)
 	aumentovelocidad	= 2													#colocando al pez dentro del rectangulo
 	velocidadbicho = 2
+
 	
 	
 	if ypez<xpez:
@@ -158,14 +162,17 @@ while True:
 
 	if PEZRECT.colliderect(COMIDARECT) or PEZ2RECT.colliderect(COMIDARECT):
 		SCORE += 1
+		MAXSCORE = SCORE
 		xcomida = random.randrange(1, 960,10)
 		ycomida = 0
+		MORDIDA.play(0,0,-1)
 		if SCORE == LEVELMULT:
 			LEVEL = LEVEL+1
 			LEVELMULT = LEVELMULT*LEVEL
 			SCREEN.blit(LEVELUP,LEVELUPRECT)
 	elif PEZRECT.colliderect(BUGRECT) or PEZ2RECT.colliderect(BUGRECT):
-			SCORE -= 1
+			SCORE -= 1*LEVEL
+			ASCO.play(0,0,-1)
 			xbug = random.randrange(1,960,10)
 			ybug = -200
 	elif SCORE < 0:
@@ -184,8 +191,9 @@ while True:
 		velocidadbicho =0
 		if event.type == pygame.KEYDOWN:
 			if event.key == pygame.K_ESCAPE:
+				MUERTE.play(0,0,-1)
 				pygame.mouse.set_visible(True)
-				os.system('python compilado.py')
+				os.system('python compilado.py ' +str(MAXSCORE))
 				sys.exit()
 	SCREEN.blit(textSurfaceObject,textRectObject)
 	pygame.display.update()
