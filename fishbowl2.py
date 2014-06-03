@@ -177,6 +177,7 @@ while True:
 		velocidadbicho =0
 		if event.type == pygame.KEYDOWN:
 			if event.key == pygame.K_ESCAPE:
+				pygame.mouse.set_visible(True)
 				os.system('python compilado.py')
 				sys.exit()
 	SCREEN.blit(textSurfaceObject,textRectObject)
