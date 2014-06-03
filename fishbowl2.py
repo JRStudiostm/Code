@@ -2,6 +2,7 @@ import pygame, sys
 from pygame.locals import *
 import random
 import os
+import commands
 
 
 
@@ -176,6 +177,7 @@ while True:
 		velocidadbicho =0
 		if event.type == pygame.KEYDOWN:
 			if event.key == pygame.K_ESCAPE:
+				os.system('python compilado.py')
 				sys.exit()
 	SCREEN.blit(textSurfaceObject,textRectObject)
 	pygame.display.update()
