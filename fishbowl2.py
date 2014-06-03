@@ -75,7 +75,9 @@ xburbuja = random.randrange(1,960,10)
 ybug = -200 			# LE PUSE ESTE VALOR PARA QUE HAYA UN RETRASO DE TIEMPO PARA QUE APAREZCA EN LA PANTALLA
 xbug = random.randrange(1,960,10)
 xpez,ypez = pygame.mouse.get_pos()
-pygame.mixer.music.load("loop.wav")
+
+#Colocando sonido al juego
+pygame.mixer.music.load("loop.wav")											
 pygame.mixer.music.play(-1,0)
 
 while True:
@@ -169,6 +171,10 @@ while True:
 	elif SCORE < 0:
 		SCREEN.blit(textSurfaceObject2,textRectObject2)
 		SCREEN.blit(textSurfaceObject3,textRectObject3)
+		pygame.mixer.music.stop()
+		sonido1=pygame.mixer.Sound("death.wav")   	#Sonido de muerte de pez
+		sonido1.play()
+		sonido1.set_volume(0.1)
 		SCREEN.blit(PEZD,(380,50))
 		xpez = -138
 		ypez = -91
