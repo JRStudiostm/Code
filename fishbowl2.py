@@ -167,8 +167,7 @@ while True:
 
 	if PEZRECT.colliderect(COMIDARECT) or PEZ2RECT.colliderect(COMIDARECT):
 		SCORE += 1
-		sonido4=pygame.mixer.Sound("atrapacomida.wav")   	#Sonido cuando come alimento
-		sonido4.play()
+
 		MAXSCORE = SCORE
 		xcomida = random.randrange(1, 960,10)
 		ycomida = 0
